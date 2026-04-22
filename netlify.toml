@@ -1,0 +1,39 @@
+# Netlify build & deploy configuration for the UnifyTechs marketing site.
+#
+# - `npm run build` runs `tsc && vite build`, emitting static assets to `dist/`.
+# - NODE_VERSION pins the build image to match local development.
+# - The SPA fallback redirect keeps deep links working and future-proofs us
+#   against adding client-side routing without another deploy config change.
+# - The `/api/*` proxy forwards same-origin API calls from the browser through
+#   Netlify's edge to the UnifyTechs backend on MonsterASP.NET. This keeps the
+#   browser talking to `https://<netlify-domain>/api/...` so:
+#     * no CORS preflight / allowlist changes needed on the backend,
+#     * no mixed-content warnings (Netlify terminates TLS, then calls HTTP
+#       server-side, which the browser never sees),
+#     * no `VITE_API_URL` env var needed — `src/config.ts` falls back to
+#       same-origin.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+  NPM_FLAGS = "--include=dev"
+
+# IMPORTANT: specific rules must be declared BEFORE the catch-all SPA fallback.
+# Netlify evaluates redirects top-to-bottom and stops at the first match.
+
+# Proxy API calls to the deployed backend. `force = true` ensures this wins
+# even if a static file ever happens to share the `/api/...` path.
+[[redirects]]
+  from = "/api/*"
+  to = "http://unifytechs.runasp.net/api/:splat"
+  status = 200
+  force = true
+
+# SPA fallback — serve index.html for any unknown path so deep links don't 404.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

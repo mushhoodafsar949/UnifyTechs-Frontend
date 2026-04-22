@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>UnifyTechs mark</title>
+  <defs>
+    <linearGradient id="utm" x1="4" y1="6" x2="44" y2="42" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6419E8"/>
+      <stop offset="0.48" stop-color="#863BFF"/>
+      <stop offset="1" stop-color="#35C8EC"/>
+    </linearGradient>
+    <linearGradient id="uts" x1="14" y1="14" x2="34" y2="34" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EEF6FF"/>
+      <stop offset="1" stop-color="#C8EBFF"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded plate (similar vibe to prior app-icon treatment) -->
+  <rect width="48" height="48" rx="13" fill="url(#utm)"/>
+  <!-- Unified network: three nodes + triangle path (reads clearly at favicon size) -->
+  <path
+    d="M24 14 L33.5 30.5 L14.5 30.5 Z"
+    fill="none"
+    stroke="url(#uts)"
+    stroke-width="2.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    opacity="0.95"
+  />
+  <circle cx="24" cy="13.2" r="3.4" fill="#F8FAFF"/>
+  <circle cx="33.6" cy="31.4" r="3.4" fill="#A8EEFF"/>
+  <circle cx="14.4" cy="31.4" r="3.4" fill="#DDD4FF"/>
+</svg>
