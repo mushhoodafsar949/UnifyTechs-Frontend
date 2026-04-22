@@ -1,1 +1,9 @@
-/*    /index.html   200
+# Netlify redirects. More specific rules MUST come first — Netlify matches top-down.
+# `200!` = rewrite (no visible URL change) with `force`, so it wins even when a
+# static asset happens to share the path.
+
+/api/*  http://unifytechs.runasp.net/api/:splat  200!
+
+# SPA fallback — serve index.html for any unknown path so client-side hash
+# routing + deep links never return 404.
+/*      /index.html                              200
